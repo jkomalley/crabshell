@@ -14,23 +14,28 @@ fn main() {
             None => continue,
         };
 
-        // execute command
-        let child = process::Command::new(&command.cmd)
-            .args(&command.args)
-            .spawn();
+        match command.cmd.as_str() {
+            "exit" => exit(),
+            _ => {
+                // execute command
+                let child = process::Command::new(&command.cmd)
+                .args(&command.args)
+                .spawn();
 
-        // wait for command to complete
-        match child {
-            Ok(mut child) => {
-                child.wait().unwrap_or_else(|_| {
-                    panic!(
-                        "Failed while waiting for command \"{}\" to finish",
-                        &command.cmd
-                    )
-                });
+                // wait for command to complete
+                match child {
+                    Ok(mut child) => {
+                        child.wait().unwrap_or_else(|_| {
+                            panic!(
+                                "Failed while waiting for command \"{}\" to finish",
+                                &command.cmd
+                            )
+                        });
+                    }
+                    Err(e) => eprintln!("{e}"),
+                };
             }
-            Err(e) => eprintln!("{e}"),
-        };
+        }
     }
 }
 
@@ -46,6 +51,11 @@ fn prompt() {
                 .expect("Could not retrieve raw error code."),
         );
     };
+}
+
+fn exit() {
+    println!(":: Terminated crabshell ::");
+    process::exit(0);
 }
 
 #[derive(Debug)]

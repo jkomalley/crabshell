@@ -4,7 +4,7 @@ use std::io::stdin;
 pub struct Input {
     pub cmd: String,
     pub args: Vec<String>,
-    pub full: String
+    pub full: String,
 }
 
 impl Input {

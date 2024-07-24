@@ -1,12 +1,15 @@
 use std::{
-    io::{stdin, stdout, Write},
+    io::stdin,
     process,
 };
 
+use crabshell::prompt::Prompt;
+
 fn main() {
+    let prompt = Prompt::new("> ");
     loop {
         // display prompt
-        prompt();
+        prompt.show();
 
         // read input
         let command = match Command::read_command_from_stdin() {
@@ -37,20 +40,6 @@ fn main() {
             }
         }
     }
-}
-
-fn prompt() {
-    // print prompt
-    print!("> ");
-
-    // flush output to show prompt
-    if let Err(e) = stdout().flush() {
-        eprintln!("Error: {}", e);
-        process::exit(
-            e.raw_os_error()
-                .expect("Could not retrieve raw error code."),
-        );
-    };
 }
 
 fn exit() {

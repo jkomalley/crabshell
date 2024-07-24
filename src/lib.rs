@@ -1,6 +1,7 @@
 use std::process;
 
 pub mod prompt;
+pub mod input;
 
 pub fn exit() {
     // cleanup

@@ -1,7 +1,4 @@
-use std::{
-    io::{stdout, Write},
-    process,
-};
+use std::io::{stdout, Result, Write};
 
 pub struct Prompt {
     end_symbol: String,
@@ -14,17 +11,11 @@ impl Prompt {
         }
     }
 
-    pub fn show(&self) {
+    pub fn show(&self) -> Result<()> {
         // print prompt
         print!("{}", self.end_symbol);
 
         // flush output to show prompt
-        if let Err(e) = stdout().flush() {
-            eprintln!("Error: {}", e);
-            process::exit(
-                e.raw_os_error()
-                    .expect("Could not retrieve raw error code."),
-            );
-        };
+        stdout().flush()
     }
 }

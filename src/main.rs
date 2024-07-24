@@ -6,7 +6,7 @@ fn main() {
     let prompt = Prompt::new("> ");
     loop {
         // display prompt
-        prompt.show();
+        prompt.show().expect("Failed to show prompt");
 
         // read input
         let line = match Input::from_stdin() {

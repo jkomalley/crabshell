@@ -3,7 +3,7 @@ use std::{
     process,
 };
 
-use crabshell::prompt::Prompt;
+use crabshell::{exit, prompt::Prompt};
 
 fn main() {
     let prompt = Prompt::new("> ");
@@ -40,11 +40,6 @@ fn main() {
             }
         }
     }
-}
-
-fn exit() {
-    println!(":: Terminated crabshell ::");
-    process::exit(0);
 }
 
 #[derive(Debug)]

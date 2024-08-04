@@ -1,6 +1,10 @@
 use std::process;
 
-use crabshell::{cd, exit, input::Input, prompt::Prompt};
+use crabshell::{
+    builtins::{cd, exit},
+    input::Input,
+    prompt::Prompt,
+};
 
 fn main() {
     let prompt = Prompt::new("> ");

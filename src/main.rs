@@ -1,6 +1,6 @@
 use std::process;
 
-use crabshell::{exit, input::Input, prompt::Prompt};
+use crabshell::{cd, exit, input::Input, prompt::Prompt};
 
 fn main() {
     let prompt = Prompt::new("> ");
@@ -16,6 +16,7 @@ fn main() {
 
         // execute command
         match line.cmd.as_str() {
+            "cd" => cd(line.args),
             "exit" => exit(),
             _ => {
                 // execute command
